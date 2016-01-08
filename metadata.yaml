@@ -1,0 +1,13 @@
+name: ubuntu-devenv
+summary: Simple Ubuntu development and test environment
+maintainer: Kevin Monroe <kevin.monroe@canonical.com>
+description: |
+  This is the 'ubuntu' charm with revision control tools preinstalled,
+  as well as relations to other developer-oriented charms. It is useful
+  as both a development environment and an endpoint for testing charms
+  like 'openjdk' and 'ibm-xlc'.
+tags: [application_development]
+provides:
+  java:
+    interface: java
+    scope: container
