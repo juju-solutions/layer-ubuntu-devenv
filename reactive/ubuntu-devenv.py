@@ -10,7 +10,4 @@ from charms.reactive import hook
 
 @hook('install')
 def install():
-    ''' Install VCS tooling '''
-    status_set('maintenance', 'Installing VCS tools')
-    check_call(['apt-get', 'install', '-y', 'bzr', 'cvs', 'git', 'subversion'])
     status_set('active', 'Ubuntu Dev Env ready!')
