@@ -16,29 +16,28 @@ class TestDeploy(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.d = amulet.Deployment(series='trusty')
-        cls.d.add('ubuntu-devenv', 'cs:~kwmonroe/trusty/ubuntu-devenv-1')
-        cls.d.add('openjdk', 'cs:~kwmonroe/trusty/openjdk-1')
+        cls.d.add('ubuntu-devenv', 'cs:~kwmonroe/trusty/ubuntu-devenv-2')
+        cls.d.add('openjdk', 'cs:~kwmonroe/trusty/openjdk-5')
         cls.d.relate('ubuntu-devenv:java', 'openjdk:java')
         cls.d.setup(timeout=900)
         cls.d.sentry.wait(timeout=1800)
         cls.unit = cls.d.sentry['ubuntu-devenv'][0]
 
     def test_vcs(self):
-        output, rc = self.unit.run("bzr version")
-        assert rc == 0, "Unexpected output from bzr: %s" % output
-
-        output, rc = self.unit.run("cvs version")
-        assert rc == 0, "Unexpected output from cvs: %s" % output
-
-        output, rc = self.unit.run("git version")
-        assert rc == 0, "Unexpected output from git: %s" % output
-
-        output, rc = self.unit.run("svn --version --quiet")
-        assert rc == 0, "Unexpected output from svn: %s" % output
+        commands = ['bzr version', 'cvs version',
+                    'git version', 'svn --version --quiet']
+        for cmd in commands:
+            print("running {}".format(cmd))
+            output, rc = self.unit.run(cmd)
+            print("output from cmd: {}".format(output))
+            assert rc == 0, "Unexpected return code: {}".format(rc)
 
     def test_java(self):
-        output, rc = self.unit.run("java -version")
-        assert 'OpenJDK' in output, "OpenJDK should be in %s" % output
+        cmd = "java -version 2>&1"
+        print("running {}".format(cmd))
+        output, rc = self.unit.run(cmd)
+        print("output from cmd: {}".format(output))
+        assert rc == 0, "Unexpected return code: {}".format(rc)
 
 if __name__ == '__main__':
     unittest.main()
