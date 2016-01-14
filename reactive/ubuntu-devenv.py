@@ -1,5 +1,3 @@
-from subprocess import check_call
-
 from charmhelpers.core.hookenv import status_set
 from charms.reactive import hook
 
@@ -10,4 +8,8 @@ from charms.reactive import hook
 
 @hook('install')
 def install():
+    '''
+    This charm doesn't need to do anything (vcs packages are installed
+    with layer options). Notify the user that we're ready.
+    '''
     status_set('active', 'Ubuntu Dev Env ready!')
