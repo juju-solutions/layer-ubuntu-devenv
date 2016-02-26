@@ -5,9 +5,8 @@ revision control tools preinstalled, as well as relations to other
 developer-oriented charms. It is useful as both a development environment and
 an endpoint for testing charms like 'openjdk' and 'ibm-xlc'.
 
-Source for this charm is available here:
-
-https://github.com/juju-solutions/layer-ubuntu-devenv
+Source for this charm is available on
+[github](https://github.com/juju-solutions/layer-ubuntu-devenv).
 
 
 # Usage

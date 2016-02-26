@@ -8,6 +8,12 @@ description: |
   like 'openjdk' and 'ibm-xlc'.
 tags: [application_development]
 provides:
+  xlc:
+    interface: xlc-compiler
+    scope: container
+  xlf:
+    interface: ftn-compiler
+    scope: container
   java:
     interface: java
     scope: container
