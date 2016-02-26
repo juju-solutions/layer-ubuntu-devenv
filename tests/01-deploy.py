@@ -16,8 +16,8 @@ class TestDeploy(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.d = amulet.Deployment(series='trusty')
-        cls.d.add('ubuntu-devenv', 'cs:~kwmonroe/trusty/ubuntu-devenv-2')
-        cls.d.add('openjdk', 'cs:~kwmonroe/trusty/openjdk-5')
+        cls.d.add('ubuntu-devenv', 'cs:~kwmonroe/trusty/ubuntu-devenv')
+        cls.d.add('openjdk', 'cs:~kwmonroe/trusty/openjdk')
         cls.d.relate('ubuntu-devenv:java', 'openjdk:java')
         cls.d.setup(timeout=900)
         cls.d.sentry.wait(timeout=1800)
