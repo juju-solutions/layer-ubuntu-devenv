@@ -1,5 +1,5 @@
-from charmhelpers.core.hookenv import status_set
-from charms.reactive import set_state, when_not
+from charmhelpers.core.hookenv import log, status_set
+from charms.reactive import is_state, set_state, when, when_not
 
 # No states are emitted from this charm. This is simply Ubuntu with a few
 # VCS tools installed. The usefulness of this charm comes by way of the
@@ -8,9 +8,34 @@ from charms.reactive import set_state, when_not
 
 @when_not('ubuntu-devenv.installed')
 def install():
-    '''
-    This charm doesn't need to do anything (vcs packages are installed
-    with layer options). Notify the user that we're ready.
-    '''
-    status_set('active', 'Ubuntu Dev Env ready!')
+    """Set the installed state.
+
+    The install function doesn't need to do anything (vcs packages are installed
+    with the base layer options). Set our installed state and an active status message.
+    """
     set_state('ubuntu-devenv.installed')
+    status_set('active', 'devenv ready')
+
+
+@when('ubuntu-devenv.installed')
+def update_status():
+    """Update status based on related charm states."""
+    ready_services = []
+    if is_state('java.ready'):
+        ready_services.append('java')
+    if is_state('xlc.ready'):
+        ready_services.append('xlc')
+    if is_state('xlf.ready'):
+        ready_services.append('xlf')
+
+    if ready_services:
+        status_suffix = ' with: %s' % (', '.join(ready_services))
+    else:
+        status_suffix = ''
+    status_set('active', 'devenv ready%s' % (status_suffix))
+
+
+@when('ubuntu-devenv.installed', 'java.ready')
+def log_java_details(java):
+    """Log pertinent Java-related details."""
+    log("Java (%s) using JAVA_HOME: '%s'" % (java.java_version(), java.java_home()))
