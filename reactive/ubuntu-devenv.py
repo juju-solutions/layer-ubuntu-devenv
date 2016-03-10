@@ -1,5 +1,6 @@
 from charmhelpers.core.hookenv import log, status_set
 from charms.reactive import is_state, set_state, when, when_not
+from charms.reactive.helpers import data_changed
 
 # No states are emitted from this charm. This is simply Ubuntu with a few
 # VCS tools installed. The usefulness of this charm comes by way of the
@@ -10,8 +11,9 @@ from charms.reactive import is_state, set_state, when, when_not
 def install():
     """Set the installed state.
 
-    The install function doesn't need to do anything (vcs packages are installed
-    with the base layer options). Set our installed state and an active status message.
+    The install function doesn't need to do anything (vcs packages are
+    installed with the base layer options). Set our installed state and an
+    active status message.
     """
     set_state('ubuntu-devenv.installed')
     status_set('active', 'devenv ready')
@@ -38,4 +40,8 @@ def update_status():
 @when('ubuntu-devenv.installed', 'java.ready')
 def log_java_details(java):
     """Log pertinent Java-related details."""
-    log("Java (%s) using JAVA_HOME: '%s'" % (java.java_version(), java.java_home()))
+    if (data_changed('java.version', java.java_version())
+            or data_changed('java.home', java.java_home())):
+
+        log("Java (%s) using JAVA_HOME: '%s'" %
+            (java.java_version(), java.java_home()))

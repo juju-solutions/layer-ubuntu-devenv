@@ -16,8 +16,8 @@ providers. This charm supports the `java` interface and serves as a
 simple principal charm that can be used to relate to a `java`
 subordinate. Deploy as follows:
 
-    juju deploy cs:~kwmonroe/trusty/ubuntu-devenv
-    juju deploy cs:~kwmonroe/trusty/openjdk
+    juju deploy ubuntu-devenv
+    juju deploy openjdk
     juju add-relation ubuntu-devenv openjdk
 
 
