@@ -7,6 +7,9 @@ description: |
   as both a development environment and an endpoint for testing charms
   like 'openjdk' and 'ibm-xlc'.
 tags: [application_development]
+series:
+  - trusty
+  - xenial
 provides:
   xlc:
     interface: xlc-compiler
