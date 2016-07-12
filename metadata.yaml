@@ -20,3 +20,10 @@ provides:
   java:
     interface: java
     scope: container
+requires:
+  db2:
+    interface: db2
+  mysql:
+    interface: mysql
+  pgsql:
+    interface: pgsql

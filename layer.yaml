@@ -1,5 +1,10 @@
 repo: git@github.com:juju-solutions/layer-ubuntu-devenv.git
-includes: ['layer:basic', 'interface:java']
+includes:
+  - 'layer:basic'
+  - 'interface:db2'
+  - 'interface:java'
+  - 'interface:mysql'
+  - 'interface:pgsql'
 options:
   basic:
     packages:
