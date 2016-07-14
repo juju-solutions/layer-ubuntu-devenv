@@ -50,7 +50,7 @@ def send_db2_details(db2):
     the relation will become ready. We don't actually need ssh access for this
     charm, so send an invalid string as our key.
     """
-    db2.set_ssh_keys("Invalid")
+    db2.set_ssh_keys("ssh-rsa invalid user")
 
 
 @when('ubuntu-devenv.installed', 'db2.ready')
