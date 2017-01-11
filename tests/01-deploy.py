@@ -15,9 +15,9 @@ class TestDeploy(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        cls.d = amulet.Deployment(series='trusty')
-        cls.d.add('ubuntu-devenv', 'cs:trusty/ubuntu-devenv')
-        cls.d.add('openjdk', 'cs:trusty/openjdk')
+        cls.d = amulet.Deployment(series='xenial')
+        cls.d.add('ubuntu-devenv', 'cs:xenial/ubuntu-devenv')
+        cls.d.add('openjdk', 'cs:xenial/openjdk')
         cls.d.relate('ubuntu-devenv:java', 'openjdk:java')
         cls.d.setup(timeout=900)
         cls.d.sentry.wait(timeout=1800)
@@ -38,6 +38,7 @@ class TestDeploy(unittest.TestCase):
         output, rc = self.unit.run(cmd)
         print("output from cmd: {}".format(output))
         assert rc == 0, "Unexpected return code: {}".format(rc)
+
 
 if __name__ == '__main__':
     unittest.main()
