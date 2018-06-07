@@ -28,7 +28,10 @@ def update_status():
     if is_state('java.ready'):
         ready_services.append('java')
     if is_state('mysql.available'):
-        ready_services.append('mysql')
+        if is_state('mysql-root.connected'):
+            ready_services.append('mysql (root)')
+        else:
+            ready_services.append('mysql')
     if is_state('pgsql.database.available'):
         ready_services.append('pgsql')
     if is_state('xlc.ready'):

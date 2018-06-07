@@ -25,5 +25,7 @@ requires:
     interface: db2
   mysql:
     interface: mysql
+  mysql-root:
+    interface: mysql-root
   pgsql:
     interface: pgsql

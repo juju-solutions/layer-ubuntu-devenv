@@ -4,6 +4,7 @@ includes:
   - 'interface:db2'
   - 'interface:java'
   - 'interface:mysql'
+  - 'interface:mysql-root'
   - 'interface:pgsql'
 options:
   basic:
