@@ -8,6 +8,7 @@ description: |
   like 'openjdk' and 'ibm-xlc'.
 tags: [application_development]
 series:
+  - bionic
   - xenial
   - trusty
 provides:
